@@ -42,7 +42,7 @@ const Header = () => {
   }
 
   return (
-    <header className="py-2 bg-accent/10 border border-grey-100 backdrop-filter backdrop-blur-sm dark:bg-white/5 backdrop-blur-sm sticky top-0 z-30 transition-all">
+    <header className="py-2 bg-accent/10  backdrop-filter backdrop-blur-sm   sticky top-0 z-30 transition-all">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
           <Logo />
