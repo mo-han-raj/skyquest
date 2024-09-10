@@ -1,65 +1,102 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import type { Config } from "tailwindcss"
 
-@layer base {
-  :root {
-    --background: 220 10% 90%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
-}
+const withMT = require("@material-tailwind/react/utils/withMT");
+const config = {
+  darkMode: ["class"],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+	],
+  prefix: "",
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      colors: {
+        grey: "grey",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        tertiary: {
+          DEFAULT: "hsl(var(--tertiary))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        pulse: {
+          "0%, 100%": { boxShadow: "0 0 0 0 var(--pulse-color)" },
+          "50%": { boxShadow: "0 0 0 8px var(--pulse-color)" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        pulse: "pulse var(--duration) ease-out infinite",
+      },
+      backgroundImage:{
+        hero: 'url(/hero/hero-bg.png)',
+        hdark: 'url(/hero/bg3.jpg)',
+        hlight: 'url(/hero/bg1.jpg)',
+        contactlight: 'url(/contact/contact2.png)',
+        contactdark: 'url(/contact/contact1.png)'
+      },
+      fontFamily: {
+        custom: ['Hotsnow', 'sans-serif'], // 'CustomFont' should match the name you gave in the @font-face rule
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground font-custom;
-  }
-}
 
-.h1 {
-  @apply text-3xl xl:text-[52px] xl:leading-[60px] tracking-[-2px] font-bold;
-}
+export default withMT(config)
 
-.subtitle {
-  @apply text-muted-foreground text-lg mb-8 font-light;
-}
-
-.carousel-container {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.iframe-container * {
-  font-family: inherit !important;
-  border: none !important;
-  background-color: transparent !important;
-}
